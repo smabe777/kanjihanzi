@@ -14,6 +14,16 @@ A local web app for learning the **2000 most frequently used Japanese kanji** an
 - **Progress stored locally** in your browser (`localStorage`), with export/import for backup or moving devices.
 - Keyboard shortcuts: `space`/`enter` to reveal, `1`–`4` to grade, `space` for the suggested grade.
 
+## Hosting
+
+Live at **https://kanjihanzi.netlify.app** (Netlify project `kanjihanzi`, GitHub repo `smabe777/kanjihanzi`).
+
+- **Account & sync**: optional email/password account (Settings → Account & sync) stores progress in MongoDB Atlas (database `kanjihanzi` on `cluster0.edcskbz`), so it follows you across devices. Without an account, progress stays in the browser.
+- **Backend**: a single Netlify Function ([netlify/functions/api.mjs](netlify/functions/api.mjs)) — JWT auth (bcrypt-hashed passwords), `GET/PUT /api/progress` with last-write-wins conflict handling.
+- **Env vars** (set on Netlify): `MONGODB_URI`, `JWT_SECRET`.
+- **Deploy**: `netlify deploy --prod` from this folder (builds locally and uploads). To deploy automatically on `git push`, connect the GitHub repo in the Netlify UI (Project configuration → Build & deploy → Link repository).
+- **Local dev with backend**: `netlify dev` (port 8888) — pulls env vars from the linked Netlify project. Plain `npm run dev` works too but without the API.
+
 ## Run it
 
 ```sh
