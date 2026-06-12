@@ -26,3 +26,4 @@ dist-ssr
 # Local env (secrets)
 .env
 .netlify
+*.local.md
